@@ -173,6 +173,9 @@ map <-
 
 #Figure SX7
 ggsave("Figure_S1.svg", map, width = 8, height = 5)
+ggsave("Figure_S1_Supplementary_Data.tiff", map, width = 8, height = 5, dpi = 600)
+ggsave("Figure_S1_Supplementary_Data.jpg", map, width = 8, height = 5, dpi = 400)
+
 
 ###Alpha diversity###
 
@@ -265,6 +268,9 @@ Alpha_shannon_fungi <-
 Fig_X1 <- grid.arrange(Alpha_observed_bacteria + labs(tag = "A"), Alpha_simpson_bacteria + labs(tag = "B"), Alpha_shannon_bacteria + labs(tag = "C"), 
                           Alpha_observed_fungi + labs(tag = "D"), Alpha_simpson_fungi + labs(tag="E"), Alpha_shannon_fungi + labs(tag="F"), ncol=3)
 ggsave(filename = paste("Figure_1.svg",sep=""), Fig_X1, width = 9, height = 6)
+ggsave(filename = paste("Figure_1.tiff",sep=""), Fig_X1, width = 9, height = 6, dpi = 600)
+ggsave(filename = paste("Figure_1.jpg",sep=""), Fig_X1, width = 9, height = 6, dpi = 400)
+
 
 ###Relative abundance###
 
@@ -418,11 +424,17 @@ for (BF in c("bact","fung")) {
 #Figure X3
 Fig_X3<- grid.arrange(Genus_plots$bact + labs(tag = "A"), Genus_plots$fung + labs(tag = "B"), ncol=1)
 ggsave(filename = paste("Figure_3.svg",sep=""), Fig_X3, width = 16, height = 10)
+ggsave(filename = paste("Figure_3.tiff",sep=""), Fig_X3, width = 16, height = 10, dpi = 600)
+ggsave(filename = paste("Figure_3.jpg",sep=""), Fig_X3, width = 16, height = 10, dpi = 400)
+
 
 #Figure SX5
 Fig_SX5 <- grid.arrange(Phylum_plots$bact + labs(tag = "A"), Phylum_plots$fung + labs(tag = "B"), Order_plots$bact + labs(tag = "C"), 
                         Order_plots$fung + labs(tag = "D"), ncol=2)
-ggsave(filename = paste("Figure_S4.svg",sep=""), Fig_SX5, width = 32, height = 10)
+ggsave(filename = paste("Figure_S4_Supplementary_Data.svg",sep=""), Fig_SX5, width = 32, height = 10)
+ggsave(filename = paste("Figure_S4_Supplementary_Data.tiff",sep=""), Fig_SX5, width = 32, height = 10, dpi = 600)
+ggsave(filename = paste("Figure_S4_Supplementary_Data.jpg",sep=""), Fig_SX5, width = 32, height = 10, dpi = 400)
+
 
 ###Beta diversity/Ordination###
 
@@ -488,10 +500,16 @@ NMDS_phyloseq_Hellinger_fung <-
 #Figure X2
 Figure_X2 <- grid.arrange(NMDS_phyloseq_Jaccard_bact + labs(tag = "A"), NMDS_phyloseq_Jaccard_fung + labs(tag = "B"), ncol=1)
 ggsave(filename = paste("Figure_2.svg",sep=""), Figure_X2, width = 8, height = 8)
+ggsave(filename = paste("Figure_2.tiff",sep=""), Figure_X2, width = 8, height = 8, dpi = 600)
+ggsave(filename = paste("Figure_2.jpg",sep=""), Figure_X2, width = 8, height = 8, dpi = 400)
+
 
 #Figure SX2
 Figure_SX2 <- grid.arrange(NMDS_phyloseq_Hellinger_bact + labs(tag = "A"), NMDS_phyloseq_Hellinger_fung + labs(tag = "B"), ncol=1)
 ggsave(filename = paste("Figure_S3.svg",sep=""), Figure_SX2, width = 8, height = 8)
+ggsave(filename = paste("Figure_S3.tiff",sep=""), Figure_SX2, width = 8, height = 8, dpi = 600)
+ggsave(filename = paste("Figure_S3.jpg",sep=""), Figure_SX2, width = 8, height = 8, dpi = 400)
+
 
 ###Cluster the samples###
 
@@ -607,6 +625,9 @@ Cluster_graph_fung <-
 #Figure SX3
 Figure_SX3 <- grid.arrange(Cluster_graph_bact + labs(tag = "A"), Clustering_inds_bact + labs(tag = "B"), Cluster_graph_fung + labs(tag = "C"), Clustering_inds_fung + labs(tag = "D"), ncol=2, widths = c(2,1))
 ggsave(filename = paste("Figure_S2.svg",sep=""), Figure_SX3, width = 10, height = 8)
+ggsave(filename = paste("Figure_S2.tiff",sep=""), Figure_SX3, width = 10, height = 8, dpi = 600)
+ggsave(filename = paste("Figure_S2.jpg",sep=""), Figure_SX3, width = 10, height = 8, dpi = 400)
+
 
 ###Compare Bulk and Fine association networks
 #Doing comparison at genus level through CCREPE
@@ -760,7 +781,3 @@ physeq_bact_Genus_RA@otu_table["08f55b866c61fd6c3104d94c26230721",c("sample_049A
 physeq_fung_Genus_RA <- transform_sample_counts(physeq_fung_Genus, function (x) sqrt(x/sum(x)))
 physeq_fung_Genus_RA@tax_table[physeq_fung_Genus_RA@tax_table[,"Genus"]=="Kretzschmaria",]
 physeq_fung_Genus_RA@otu_table["d56ca28652a1b8b0c1495a60fa09ef5d",c("sample_007A","sample_007B","sample_007C")]
-
-#Journal requires .eps image submission but export does not work with all characters.
-#Convert after the files have been saved using a simple BASH command and Inkscape
-#for file in *.svg; do inkscape "$file" -o "${file%svg}eps" --export-ignore-filters --export-ps-level=3; done
